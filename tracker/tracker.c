@@ -42,6 +42,7 @@
 #include "adc.h"
 #include "adc_i2c.h"
 #include "ap.h"
+#include "ozone.h"
 #include "geiger.h"
 #include "misc.h"
 #include "snapper.h"
@@ -222,6 +223,11 @@ void LoadConfigFile(struct TConfig *Config)
 	if (Config->EnableAP)
 	{
 		printf("Analog Pressure Enabled\n");
+	}
+	ReadBoolean(fp, "enable_ozone", -1, 0, &(Config->Enableozone));
+	if (Config->Enableozone)
+	{
+		printf("Ozone Concentration Enabled\n");
 	}
 
 	ReadBoolean(fp, "enable_geiger", -1, 0, &(Config->EnableGeiger));
@@ -667,7 +673,7 @@ int main(void)
 	char Sentence[100], Command[100];
 	struct stat st = {0};
 	struct TGPS GPS;
-	pthread_t PredictionThread, LoRaThread, APRSThread, GPSThread, DS18B20Thread, ADCThread, APThread, GeigerThread, CameraThread, BMP085Thread, BME280Thread, LEDThread, LogThread;
+	pthread_t PredictionThread, LoRaThread, APRSThread, GPSThread, DS18B20Thread, ADCThread, APThread, OzoneThread, GeigerThread, CameraThread, BMP085Thread, BME280Thread, LEDThread, LogThread;
 	
 	if (prog_count("tracker") > 1)
 	{
@@ -957,7 +963,14 @@ int main(void)
 			return 1;
 		}
 	}
-
+	if (Config.EnableOzone)
+	{
+		if (pthread_create(&OzoneThread, NULL, OzoneLoop, &GPS))
+		{
+			fprintf(stderr, "Error creating Ozone thread\n");
+			return 1;
+		}
+	}
 	if (Config.EnableGeiger)
 	{
 		if (pthread_create(&GeigerThread, NULL, GeigerLoop, &GPS))

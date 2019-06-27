@@ -16,6 +16,9 @@ struct TGPS
 	float BMP180Temperature;
 	float Humidity;
 	float Pressure;
+	float OzoneMRsv;
+	float OzonePP;
+	float OzoneMRrv;
 	float BoardCurrent;
 	int DS18B20Count;
 	int CPM;
