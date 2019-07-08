@@ -136,6 +136,7 @@ struct TConfig
 	int EnableBME280;
 	int EnableAP;
 	int EnableGeiger;
+	int EnableOzone;
 	
 	// Logging
 	int EnableGPSLogging;
