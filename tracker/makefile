@@ -1,8 +1,8 @@
 tracker: tracker.o gps.o misc.o DS18B20.o adc.o adc_i2c.o snapper.o led.o bmp085.o bme280.o ap.o geiger.o aprs.o lora.o prediction.o log.o
-	cc -o tracker tracker.o gps.o misc.o DS18B20.o ap.o geiger.o adc.o adc_i2c.o snapper.o led.o bmp085.o bme280.o aprs.o  lora.o prediction.o log.o -lm -lwiringPi -lwiringPiDev -pthread -lpigpio -lrt
+	cc -o tracker tracker.o gps.o misc.o DS18B20.o ap.o ozone.o geiger.o adc.o adc_i2c.o snapper.o led.o bmp085.o bme280.o aprs.o  lora.o prediction.o log.o -lm -lwiringPi -lwiringPiDev -pthread -lpigpio -lrt
 
 
-tracker.o: tracker.c gps.h misc.h DS18B20.h adc.h adc_i2c.h ap.h geiger.h bmp085.h bme280.h lora.h aprs.h prediction.h
+tracker.o: tracker.c gps.h misc.h DS18B20.h adc.h adc_i2c.h ap.h geiger.h bmp085.h bme280.h lora.h aprs.h prediction.h ozone.h
 	gcc -c -pthread tracker.c
 
 gps.o: gps.c gps.h misc.h
@@ -16,6 +16,9 @@ adc.o: adc.c adc.h misc.h gps.h
 
 ap.o: ap.c ap.h misc.h gps.h
 	gcc -c -pthread ap.c
+
+ozone.o: ozone.c ozone.h misc.h gps.h
+	gcc -c -pthread ozone.c
 
 geiger.o: geiger.c geiger.h misc.h gps.h
 	gcc -c -pthread geiger.c
