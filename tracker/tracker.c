@@ -969,7 +969,7 @@ int main(void)
 	}
 	if (Config.EnableOzone)
 	{
-		if (pthread_create(&OzoneThread, NULL, ozoneLoop, &GPS))
+		if (pthread_create(&OzoneThread, NULL, OzoneLoop, &GPS))
 		{
 			fprintf(stderr, "Error creating Ozone thread\n");
 			return 1;
