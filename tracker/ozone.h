@@ -1,2 +1,2 @@
-void *ozoneLoop(void *some_void_ptr);
+void *OzoneLoop(void *some_void_ptr);
 
