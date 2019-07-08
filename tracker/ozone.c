@@ -26,7 +26,7 @@ double ReadOzone(int chan)
 
    	RawValueOzone = analogRead(chan);
 	RawValueNO2 = analogRead(chan);
-	Result = (((double)RawValueOzone-(double)RawValueNO2) / 1024.0 * 5.0;
+	Result = ((double)RawValueOzone-(double)RawValueNO2) / 1024.0 * 5.0;
 	
 		//Calibration missing
 	//printf("RawValue = %i\n", RawValue);
