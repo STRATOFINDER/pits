@@ -103,7 +103,7 @@ void BuildSentence(char *TxLine, int SentenceCounter, struct TGPS *GPS)
 	}
 	if (Config.EnableOzone)
 	{
-		sprintf(ExtraFields2, ",%.1f", GPS->Ozone);
+		sprintf(ExtraFields2, ",%.1f", GPS->OzonePP);
 	}
 
 	if (Config.EnableBME280)
@@ -228,7 +228,7 @@ void LoadConfigFile(struct TConfig *Config)
 	{
 		printf("Analog Pressure Enabled\n");
 	}
-	ReadBoolean(fp, "enable_ozone", -1, 0, &(Config->Enableozone));
+	ReadBoolean(fp, "enable_ozone", -1, 0, &(Config->EnableOzone));
 	if (Config->EnableOzone)
 	{
 		printf("Ozone Concentration Enabled\n");

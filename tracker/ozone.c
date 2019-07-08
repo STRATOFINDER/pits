@@ -52,7 +52,7 @@ void *OzoneLoop(void *some_void_ptr)
 	while (1)
 	{
 		Ozone = ReadOzone(100);
-		GPS->Ozone = Ozone ;
+		GPS->OzonePP = Ozone ;
 
 		// printf("Ozone = %lf\n", Ozone);
 
